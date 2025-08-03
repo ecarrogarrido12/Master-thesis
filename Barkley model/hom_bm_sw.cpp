@@ -6,14 +6,14 @@
 // Physical parameters
 const double a = 0.3;
 const double b = 0.01;
-const double eps = 1.0/200.0;
+const double eps = 1.0 / 200.0;
 const double gamma = 0.01;
 
 // Numerical parameters
 const int   L = 40;
 const int   N = 81;
 const double delta = 1e-4;
-const double dt = (std::pow(L, 2))/(5*std::pow(N - 1, 2));
+const double dt = (std::pow(L, 2)) / (5 * std::pow(N - 1, 2));
 const double h = static_cast<double>(L) / (static_cast<double>(N) - 1);
 const double one_m_dt = 1 - dt;
 const double one_o_a = 1.0 / a;
@@ -37,7 +37,7 @@ void initialize_spiral_wave() {
 			if (i < N / 2) {
 				v[i][j] = a / 2.0;
 			}
-			if (j > (N / 2)) {
+			if (j > N / 2) {
 				u[i][j] = 1.0;
 			}
 		}
@@ -117,12 +117,12 @@ int main() {
 	std::ofstream file("simulation_data_barkley_model.txt");
 
 	// Run the simulation for a certain number of steps and save the state
-	int num_steps = 12000;
+	int num_steps = 180;
 	for (int step_num = 0; step_num < num_steps; ++step_num) {
 		step();
 
-		// Save the state every 300 steps
-		if (step_num % 3000 == 0) {
+		// Save the state
+		if (step_num % 20 == 0) {
 			save_state_to_file(file);
 		}
 	}
