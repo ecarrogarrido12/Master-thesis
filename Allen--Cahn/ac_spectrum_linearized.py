@@ -3,7 +3,7 @@ from scipy.sparse import diags
 import matplotlib.pyplot as plt
 from scipy.sparse.linalg import eigsh
 
-# Type of test
+# Type of test: 'zero', 'one' or 'tanh', depending on the stationary solution u^*(xi).
 ss = 'one'
 
 # Numerical parameters

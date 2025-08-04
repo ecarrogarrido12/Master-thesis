@@ -9,7 +9,7 @@ seed = 42
 
 # Definition of the heterogeneity
 def s(x, x0):
-    if heterogeneity == 'sech': return 10*np.sqrt(1 - np.tanh(10*(x - x0)) ** 2)
+    if heterogeneity == 'sech': return np.sqrt(1 - np.tanh((x - x0)) ** 2)
     if heterogeneity == 'periodic': return np.sin(np.pi * x)
     return 0 * x
 

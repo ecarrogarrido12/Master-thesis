@@ -8,7 +8,8 @@ L = 40
 n_steps = 9
 
 # Initialize the array that storages the states u(t)
-U = []; s = []
+U = []
+s = []
 
 # Read file
 with open("simulation_data_barkley_model.txt", "r") as file:
@@ -23,9 +24,12 @@ with open("simulation_data_barkley_model.txt", "r") as file:
     u_t = []
     for line in file:
         if line.startswith("#"):
-            u_t = np.array(u_t); U.append(u_t); u_t = []
+            u_t = np.array(u_t)
+            U.append(u_t)
+            u_t = []
         else:
-            row = list(map(float, line.split())); u_t.append(row)
+            row = list(map(float, line.split()))
+            u_t.append(row)
     U = np.array(U)
 
 # Plot simulations

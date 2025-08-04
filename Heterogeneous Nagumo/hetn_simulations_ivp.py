@@ -9,12 +9,12 @@ from matplotlib.ticker import MaxNLocator
 ic = 'tanh'
 heterogeneity = 'sech'
 
-# Seed
+# Seed for the random heterogeneity
 seed = 42
 
 # Physical parameters
-mu = 0.01
-gamma = 0.001
+mu = 0.1
+gamma = 0.01
 x0 = -5
 
 # Numerical parameters
@@ -28,7 +28,7 @@ t_steps = 10000
 # Set initial condition
 def u0(x):
     if ic == 'tanh':
-        return np.tanh((x + 2.072957588537434) / np.sqrt(2))
+        return np.tanh(x / np.sqrt(2))
     return np.zeros_like(x)
 
 
@@ -36,9 +36,8 @@ def u0(x):
 def S(x):
     np.random.seed(seed)
     if heterogeneity == 'periodic': return np.sin(np.pi * x)
-    if heterogeneity == 'exp': return np.exp(-(x - x0) ** 2 / 2.0)
     if heterogeneity == 'random': return np.random.normal(loc=0.0, scale=1.0, size=len(x))
-    if heterogeneity == 'sech': return 1.0 / (np.cosh(x - x0))
+    if heterogeneity == 'sech': return np.sqrt(1 - np.tanh((x - x0)) ** 2)
     return np.zeros_like(x)
 
 
@@ -108,8 +107,9 @@ def main():
     main_diag = -2.0 * np.ones(N + 1)
     below_diag = 1.0 * np.ones(N)
     upper_diag = np.copy(below_diag)
+    # No-flux Neumann bc
     below_diag[-1] = 2.0
-    upper_diag[0] = 2.0  # No-flux Neumann bc
+    upper_diag[0] = 2.0
     Ah = diags(diagonals=[below_diag, main_diag, upper_diag],
                offsets=[-1, 0, 1],
                shape=(N + 1, N + 1),

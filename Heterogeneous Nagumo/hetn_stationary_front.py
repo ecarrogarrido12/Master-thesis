@@ -78,8 +78,6 @@ def main():
     plt.savefig("HeN_SF_sech.png")
     plt.show()
 
-    # Plot simulation
-
 
 if __name__ == "__main__":
     main()

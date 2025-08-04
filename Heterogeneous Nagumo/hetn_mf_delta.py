@@ -6,7 +6,6 @@ from scipy.integrate import quad
 gamma_prm = 1 / (3 * np.sqrt(6)) + 0.01
 sgn_gamma_prm = 1 if gamma_prm > 0 else (0 if gamma_prm == 0 else -1)
 x0 = -5
-a = 100
 
 
 # Closed-form of the roots
@@ -15,11 +14,6 @@ def phi_star():
     y1 = (2 / np.sqrt(3)) * np.sin(psi)
     y2 = -(2 / np.sqrt(3)) * np.sin(psi + sgn_gamma_prm * np.pi / 3)
     return x0 - np.sqrt(2) * np.arctanh([y1, y2])
-
-
-# Definition of the heterogeneity
-def s(x):
-    return a*np.sqrt(1 - np.tanh(a*(x - x0)) ** 2)
 
 
 # Definition of u_h and its derivative
