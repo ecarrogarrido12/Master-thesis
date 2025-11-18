@@ -45,7 +45,7 @@ for n in range(n_steps):
 # Create animation
 fig, ax = plt.subplots(figsize=(8, 4.5))
 extent = [0, L, 0, L]
-cax = ax.imshow(U[0:], cmap='viridis', origin='lower', extent=extent)
+cax = ax.imshow(U[0], cmap='viridis', origin='lower', extent=extent)
 cbar = fig.colorbar(cax)
 cbar.set_label(r'u((x, y), t)', fontsize=18)
 ax.set_xlabel('x', fontsize=18)
